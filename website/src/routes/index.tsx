@@ -21,7 +21,8 @@ import {
 import { useFramework } from './plugin@framework';
 
 export const head: DocumentHead = {
-  title: 'Formisch: The modular and type-safe form library for any framework',
+  title:
+    'Formisch: The lightweight, schema-first, and fully type-safe form library for React, Solid, Vue, Svelte and more',
   meta: [
     {
       name: 'description',

@@ -1,18 +1,20 @@
+import solid from 'vite-plugin-solid';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
+  plugins: [solid()],
   test: {
     environment: 'jsdom',
-    isolate: false,
+    setupFiles: ['./src/vitest/setup.ts'],
     coverage: {
       include: ['src'],
       exclude: [
         'src/types',
         'src/vitest',
-        'src/regex.ts',
         '**/index.ts',
-        '**/types.ts',
+        '**/index.tsx',
         '**/*.test.ts',
+        '**/*.test.tsx',
         '**/*.test-d.ts',
       ],
     },
