@@ -2,8 +2,9 @@
 
 All notable changes to the library will be documented in this file.
 
-## vX.X.X (Month DD, YYYY)
+## v0.7.2 (May 17, 2026)
 
+- Change `@formisch/core` to v0.6.4
 - Fix `reset` method to apply falsy and explicit `undefined` values when resetting the initial input of a specific field (issue #78)
 
 ## v0.7.1 (April 16, 2026)

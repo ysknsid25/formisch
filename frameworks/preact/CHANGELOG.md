@@ -2,6 +2,11 @@
 
 All notable changes to the library will be documented in this file.
 
+## v0.9.6 (May 17, 2026)
+
+- Change `@formisch/core` to v0.6.4
+- Change `@formisch/methods` to v0.7.2
+
 ## v0.9.5 (April 16, 2026)
 
 - Change `@formisch/methods` to v0.7.1
