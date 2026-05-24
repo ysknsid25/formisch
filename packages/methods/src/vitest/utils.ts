@@ -1,12 +1,12 @@
 import {
   type BaseFormStore,
   createFormStore,
+  type FormSchema,
   initializeFieldStore,
   INTERNAL,
   type InternalArrayStore,
   type InternalFormStore,
   type PathKey,
-  type Schema,
   type ValidationMode,
 } from '@formisch/core';
 import type * as v from 'valibot';
@@ -15,7 +15,7 @@ import { vi } from 'vitest';
 /**
  * Configuration options for creating a test store.
  */
-interface CreateTestStoreConfig<TSchema extends Schema> {
+interface CreateTestStoreConfig<TSchema extends FormSchema> {
   validate?: ValidationMode | undefined;
   revalidate?: Exclude<ValidationMode, 'initial'> | undefined;
   initialInput?: v.InferInput<TSchema> | undefined;
@@ -30,10 +30,10 @@ interface CreateTestStoreConfig<TSchema extends Schema> {
  *
  * @returns A form store for testing with access to internal state.
  */
-export function createTestStore<TSchema extends Schema>(
+export function createTestStore<TSchema extends FormSchema>(
   schema: TSchema,
   config: CreateTestStoreConfig<TSchema> = {}
-): BaseFormStore<TSchema> & InternalFormStore {
+): BaseFormStore<TSchema> & InternalFormStore<TSchema> {
   const {
     validate = 'submit',
     revalidate = 'input',
@@ -72,7 +72,7 @@ export function createTestStore<TSchema extends Schema>(
   // This mimics how BaseFormStore works
   const wrapper = {
     [INTERNAL]: internalStore,
-  } as BaseFormStore<TSchema> & InternalFormStore;
+  } as BaseFormStore<TSchema> & InternalFormStore<TSchema>;
 
   // Proxy all properties from internal to wrapper for easy access
   for (const key of Object.keys(internalStore)) {

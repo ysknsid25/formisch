@@ -1,7 +1,11 @@
 import type * as v from 'valibot';
 import { vi } from 'vitest';
 import { createFormStore } from '../form/createFormStore/createFormStore.ts';
-import type { InternalFormStore, ValidationMode } from '../types/index.ts';
+import type {
+  FormSchema,
+  InternalFormStore,
+  ValidationMode,
+} from '../types/index.ts';
 
 /**
  * Configuration options for creating a test store.
@@ -21,10 +25,10 @@ interface CreateTestStoreConfig {
  *
  * @returns An internal form store for testing.
  */
-export function createTestStore<TSchema extends v.GenericSchema>(
+export function createTestStore<TSchema extends FormSchema>(
   schema: TSchema,
   config: CreateTestStoreConfig = {}
-): InternalFormStore {
+): InternalFormStore<TSchema> {
   const { validate, revalidate, initialInput, issues } = config;
 
   const result: v.SafeParseResult<TSchema> = issues
@@ -42,7 +46,17 @@ export function createTestStore<TSchema extends v.GenericSchema>(
       };
 
   const parse = vi.fn().mockResolvedValue(result);
-  return createFormStore({ schema, initialInput, validate, revalidate }, parse);
+  // `createFormStore` returns a non-generic `InternalFormStore`, so cast back to
+  // the concrete schema to keep the generic parameter meaningful for callers.
+  return createFormStore(
+    {
+      schema,
+      initialInput: initialInput as v.InferInput<TSchema>,
+      validate,
+      revalidate,
+    },
+    parse
+  ) as InternalFormStore<TSchema>;
 }
 
 /**

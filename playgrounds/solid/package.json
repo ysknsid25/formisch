@@ -21,8 +21,15 @@
     "clsx": "^2.1.1",
     "solid-js": "^1.9.7",
     "tailwindcss": "^4.1.11",
-    "valibot": "^1.2.0",
+    "valibot": "^1.4.1",
     "vinxi": "^0.5.8"
+  },
+  "devDependencies": {
+    "@formisch/eslint-config": "workspace:*",
+    "eslint": "^9.31.0",
+    "eslint-plugin-solid": "^0.14.5",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.3"
   },
   "engines": {
     "node": ">=22"
