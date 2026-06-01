@@ -4,3 +4,11 @@ packages:
   - 'playgrounds/*'
   - 'scripts'
   - 'website'
+allowBuilds:
+  '@parcel/watcher': true
+  deasync: true
+  esbuild: true
+  sharp: true
+  vercel: true
+patchedDependencies:
+  '@qwik.dev/router@2.0.0-beta.9': patches/@qwik.dev__router@2.0.0-beta.9.patch
